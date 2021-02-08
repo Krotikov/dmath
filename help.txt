@@ -1,0 +1,21 @@
+List of comands for program:
+1)+ "set_name" - create_set
+2)- "set_name" - delete_set
+
+3)add "elem_name">"set_name" - add_elem
+4)del "elem_name">"set_name" - delete_elem
+5)src "elem_name">"set_name" - search_elem
+
+--Unary operations--
+6)crd "set_name" - cardinaity of set
+7)check
+
+--Binary operations--
+8)mrg "set_name1"-"set_name2" - merger
+9)itr "set_name1"-"set_name2" - intersection
+10)dif "set_name1"-"set_name2" - residual
+11)sdf "set_name1"-"set_name2" - symmetric difference
+12)inc "set_name1"-"set_name2" - inclusion check
+
+
+When you learn string type in c++ perhaps should use full names of operations.

@@ -1,0 +1,7 @@
+Examples of name:
+create "set_name" //correct
+create "sob@4|(a" //correct
+create "$_$+-_-"  //correct
+create "set"name" //error
+create "set_name  //error
+create set_name"  //error
