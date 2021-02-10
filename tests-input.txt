@@ -1,0 +1,28 @@
+Test input
+//Correct
+create "set name" 
+create "sob@4|(a" 
+create "$_$+-_-"  
+
+//Error
+create "set"name" 
+create "set 
+create setname"  
+create "set_name"
+
+//too long 
+create "qwertyuioqdyrewwertyeeqrtewerqweewrtyuiuyeuisdfdfdsfgfdsafgdfsgdfsafgdsdgddfghdghfgdsgfdgfgsdgfdfgdggfdfggfgdfgdsdsddsdsgdfdsgdhfdgfdsgfdhfdgsfgddgsfgdhgdgsfgdhgfdgsgdhdfsdsgdhdfgd"
+
+//two args
+create "a"
+addElem "abc" "a"
+
+create  "a"
+addElem "abc"    "a"
+
+//Error
+create "a"
+addElem "abc""a"
+
+create "a"
+addElem "abc" to "a"

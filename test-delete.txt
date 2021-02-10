@@ -1,0 +1,30 @@
+//Correct
+create "b"
+create "a"
+delete "b"
+checkSetList
+
+create "a"
+create "b"
+create "c"
+delete "b"
+checkSetList
+
+create "a"
+create "b"
+create "aa"
+create "abc"
+create "bbb"
+delete "a"
+delete "bbb"
+delete "b"
+checkSetList
+
+//Error
+create "a"
+create "b"
+delete "c"
+checkSetList
+
+delete "asd"
+checkSetList

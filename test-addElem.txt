@@ -1,0 +1,21 @@
+create "a"
+addElem "abc" "a"
+checkSet "a"
+
+create "a"
+checkSet "a"
+
+create "a"
+addElem "a" "a"
+addElem "b" "a"
+addElem "bbb" "a"
+addElem "z" "a"
+addElem "xyz" "a"
+checkSet "a"
+
+//Error
+create "a"
+addElem "abc" "a"
+addElem "abcd" "a"
+addElem "abc" "a"
+checkSet "a"

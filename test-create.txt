@@ -1,0 +1,27 @@
+//correct
+create "b"
+create "a"
+checkSetList
+
+create "a"
+create "b"
+create "c"
+
+create "a"
+create "b"
+create "aa"
+create "abc"
+create "bbb"
+checkSetList
+
+
+//same name
+create "a"
+create "a"
+checkSetList
+
+create "a"
+create "b"
+create "a"
+checkSetList
+

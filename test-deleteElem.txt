@@ -1,0 +1,49 @@
+//Correct
+create "a"
+addElem "aaa" "a"
+deleteElem "aaa" "a"
+checkSet "a"
+
+create "a"
+addElem "aaa" "a"
+addElem "aab" "a"
+addElem "aba" "a"
+deleteElem "aaa" "a"
+checkSet "a"
+
+create "a"
+addElem "aaa" "a"
+addElem "aab" "a"
+addElem "aba" "a"
+deleteElem "aaa" "a"
+deleteElem "aba" "a"
+addElem "aaa" "a"
+checkSet "a"
+
+//Error
+deleteElem "aaa" "a"
+
+create "a"
+addElem "aab" "a"
+deleteElem "aaa" "a"
+
+//JFF
+create "a"
+addElem "aaa" "a"
+addElem "aab" "a"
+addElem "aba" "a"
+deleteElem "aaa" "a"
+deleteElem "aba" "a"
+deleteElem "aab" "a"
+checkSet "a"
+delete "a"
+checkSetList
+
+create "a"
+addElem "aaa" "a"
+addElem "aab" "a"
+addElem "aba" "a"
+delete "a"
+checkSet "a"
+checkSetList
+

@@ -1,0 +1,36 @@
+//Correct
+create "a"
+cardinality "a"
+
+create "a"
+addElem "aaa" "a"
+deleteElem "aaa" "a"
+cardinality "a"
+delete "a"
+
+create "a"
+addElem "aaa" "a"
+addElem "aab" "a"
+addElem "aba" "a"
+cardinality "a"
+
+create "a"
+addElem "aaa" "a"
+addElem "aab" "a"
+addElem "aba" "a"
+deleteElem "aaa" "a"
+cardinality "a"
+checkSet "a"
+
+create "a"
+addElem "aaa" "a"
+addElem "aab" "a"
+addElem "aba" "a"
+create "b"
+addElem "aaa" "b"
+addElem "aab" "b"
+addElem "aba" "b"
+addElem "abb" "b"
+cardinality "a"
+cardinality "b"
+

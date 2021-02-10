@@ -1,21 +1,37 @@
 List of comands for program:
-1)+ "set_name" - create_set
-2)- "set_name" - delete_set
+--Actions--
+1)create "set-name" - create set
+2)delete "set-name" - delete set (if exist)
 
-3)add "elem_name">"set_name" - add_elem
-4)del "elem_name">"set_name" - delete_elem
-5)src "elem_name">"set_name" - search_elem
+3)addElem "elem-name" "set-name" - add element to set (if exist)
+4)delElem "elem-name" "set-name" - delete elem to set (if exist)
+5)searchElem "elem-name" "set-name" - search elem in set (if exist)
 
---Unary operations--
-6)crd "set_name" - cardinaity of set
-7)check
+6)cardinality "set-name" - returns cardinaity of set
 
---Binary operations--
-8)mrg "set_name1"-"set_name2" - merger
-9)itr "set_name1"-"set_name2" - intersection
-10)dif "set_name1"-"set_name2" - residual
-11)sdf "set_name1"-"set_name2" - symmetric difference
-12)inc "set_name1"-"set_name2" - inclusion check
+--Operations with sets--
+7)union "set-name1" "set-name2" "res-set-name" - creates union of set1 and set2 
+then assigns it to the res-set (if both, set1 and set2 exist)
 
+8)intersection "set-name1" "set-name2" "res-set-name" - creates intersection
+of set1 and set2 then assigns it to the res-set (if both, set1 and set2 exist)
 
-When you learn string type in c++ perhaps should use full names of operations.
+9)diff "set-name1" "set-name2" "res-set-name" - creates difference between set1
+and set2 then assigns it to the res-set (if both, set1 and set2 exist)
+
+10)symDiff "set-name1"-"set-name2" "res-set-name" - creates symmetrical 
+difference between set1 and set2 then assigns it to the res-set (if both, 
+set1 and set2 exist)
+
+11)inclusion "set-name1" "set-name2" - print "TRUE" if set2 inlcudes set1 OR 
+"FALSE" if does not (if both, set1 and set2 exist)
+
+--Some other stuff--
+12)checkSetList - print names of all existing sets OR print "Empty..." if there
+are no sets
+13)checkSet "set-name" - print all elements in set (if exist) OR print "Empty..."
+if there are no elements
+
+Points:
+1)To stop program: Ctrl+Z
+2)Set name has the same rules as element name
