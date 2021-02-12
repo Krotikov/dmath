@@ -38,4 +38,11 @@ ERR_STATUS ElemAdd(std::string elemName, std::string setName, univ_t* univ);
 ERR_STATUS ElemSearch(std::string elemName, std::string setName, univ_t* univ);
 ERR_STATUS ElemDelete(std::string elemName, std::string setName, univ_t* univ);
 
+ERR_STATUS SetUnion(std::string setName1, std::string setName2, std::string resName, univ_t* univ);
+ERR_STATUS SetIntersection(std::string setName1, std::string setName2, std::string resName, univ_t* univ);
+ERR_STATUS SetDiff(std::string setName1, std::string setName2, std::string resName, univ_t* univ);
+ERR_STATUS SetSymDiff(std::string setName1, std::string setName2, std::string resName, univ_t* univ);
+ERR_STATUS SetInclusion(std::string setName1, std::string setName2, univ_t* univ);
+
+
 #endif /*SET_H*/

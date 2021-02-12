@@ -52,6 +52,25 @@ ERR_STATUS InpGetTwoArgs(std::string* arg1, std::string* arg2, std::string input
   return OK;
 }
 
+ERR_STATUS InpGetThreeArgs(std::string* arg1, std::string* arg2, std::string* arg3, std::string input, decltype(input.size())* index) {
+  ERR_STATUS status = OK;
+
+  status = InpGetArg(arg1, input, index);
+  if (status != OK)
+    return status;
+
+  status = InpGetArg(arg2, input, index);
+  if (status != OK)
+    return status;
+
+  status = InpGetArg(arg3, input, index);
+  if (status != OK)
+    return status;
+
+  return OK;
+}
+
+
 
 
 

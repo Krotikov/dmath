@@ -76,6 +76,12 @@ void PrintErr(ERR_STATUS status) {
   case NOT_FOUND_EL:
     cout << "ERROR: the elem with this name does not exist in the set which name you entered" << endl;
     break;
+  case INCLUDE:
+    cout << "TRUE" << endl;
+    break;
+  case NOT_INCLUDE:
+    cout << "FALSE" << endl;
+    break;
   case ERROR:
     cout << "ERROR: does not classified this error" << endl;
     break;
@@ -89,14 +95,21 @@ void PrintErr(ERR_STATUS status) {
 
 
 void Process() {
+  //Main
   string input;
   string comand;
+  univ_t* univ;
+  decltype(input.size()) index;
+  //For func
   string setName;
   string elemName;
-  ERR_STATUS status = OK;
-  univ_t* univ;
+  //For set operations
+  string setName1;
+  string setName2;
+  string resName;
+  //For set cardinality
   int card = 0;
-  decltype(input.size()) index;
+  ERR_STATUS status = OK;
 
   univ = InitUniv();
 
@@ -177,15 +190,60 @@ void Process() {
       std::cout << "Element succesfully found" << std::endl;
       break;
 
-    /*case UNION:
+    case UNION:
+      status = InpGetThreeArgs(&setName1, &setName2, &resName, input, &index);
+      if (status != OK) {
+        PrintErr(status);
+        break;
+      }
+      status = SetUnion(setName1, setName2, resName, univ);
+      if (status != OK)
+        PrintErr(status);
+      break;
 
     case INTERSECTION:
+      status = InpGetThreeArgs(&setName1, &setName2, &resName, input, &index);
+      if (status != OK) {
+        PrintErr(status);
+        break;
+      }
+      status = SetIntersection(setName1, setName2, resName, univ);
+      if (status != OK)
+        PrintErr(status);
+      break;
 
     case DIFF:
+      status = InpGetThreeArgs(&setName1, &setName2, &resName, input, &index);
+      if (status != OK) {
+        PrintErr(status);
+        break;
+      }
+      status = SetDiff(setName1, setName2, resName, univ);
+      if (status != OK)
+        PrintErr(status);
+      break;
 
     case SYMDIFF:
+      status = InpGetThreeArgs(&setName1, &setName2, &resName, input, &index);
+      if (status != OK) {
+        PrintErr(status);
+        break;
+      }
+      status = SetSymDiff(setName1, setName2, resName, univ);
+      if (status != OK)
+        PrintErr(status);
+      break;
 
-    case INCLUSION:*/
+    case INCLUSION:
+      status = InpGetTwoArgs(&setName1, &setName2, input, &index);
+      if (status != OK) {
+        PrintErr(status);
+        break;
+      }
+      status = SetInclusion(setName1, setName2, univ);
+      if (status != OK)
+        PrintErr(status);
+      break;
 
     case CHECK_SET:
       status = InpGetArg(&setName, input, &index);
@@ -211,9 +269,13 @@ void Process() {
       break;
     }
 
+    //free all strings
     comand = "";
     setName = "";
     elemName = "";
+    setName1 = "";
+    setName2 = "";
+    resName = "";
   }
 
   DeleteUniv(univ);

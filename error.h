@@ -17,7 +17,9 @@ typedef enum {
   TOO_LONG,
   ERROR_SAME_NAME, 
   NOT_FOUND_SET, 
-  NOT_FOUND_EL
+  NOT_FOUND_EL, 
+  NOT_INCLUDE, 
+  INCLUDE
 }ERR_STATUS;
 
 #endif /*ERROR_H*/

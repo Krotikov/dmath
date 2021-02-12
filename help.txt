@@ -35,3 +35,4 @@ if there are no elements
 Points:
 1)To stop program: Ctrl+Z
 2)Set name has the same rules as element name
+3)If both sets have no elements inclusion returns TRUE

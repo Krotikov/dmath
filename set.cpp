@@ -323,3 +323,234 @@ ERR_STATUS ElemDelete(std::string elemName, std::string setName, univ_t* univ) {
   delete elem;
   return OK;
 }
+
+
+
+elem_t* Append(set_t* set, elem_t* toAdd, elem_t* endOfList) {
+  elem_t* elem = InitElem(toAdd->elemName);
+  if (endOfList == nullptr) {
+    set->head = elem;
+    return elem;
+  }
+
+  endOfList->next = elem;
+  elem->prev = endOfList;
+
+  return elem;
+}
+
+
+ERR_STATUS SetUnion(std::string setName1, std::string setName2, std::string resName, univ_t* univ) {
+  if (univ == nullptr)
+    return ERROR;
+
+  set_t* set1 = SetSearch(setName1, univ);
+  if (set1 == nullptr)
+    return NOT_FOUND_SET;
+
+  set_t* set2 = SetSearch(setName2, univ);
+  if (set2 == nullptr)
+    return NOT_FOUND_SET;
+
+  SetCreate(resName, univ);
+  set_t* res = SetSearch(resName, univ);
+  if (res == nullptr)
+    return ERROR;
+
+  elem_t* tmp1 = set1->head;
+  elem_t* tmp2 = set2->head;
+  elem_t* tmp3 = res->head;
+  elem_t* rest = nullptr;
+  elem_t* toAdd = nullptr;
+
+  while (tmp1 != nullptr && tmp2 != nullptr) {
+    if (tmp1->elemName > tmp2->elemName) {
+      toAdd = tmp1;
+      tmp1 = tmp1->next;
+    }
+    else if (tmp1->elemName < tmp2->elemName) {
+      toAdd = tmp2;
+      tmp2 = tmp2->next;
+    }
+    else {
+      toAdd = tmp1;
+      tmp1 = tmp1->next;
+      tmp2 = tmp2->next;
+    }
+    tmp3 = Append(res, toAdd, tmp3);
+  }
+
+  if (tmp1 != nullptr)
+    rest = tmp1;
+  if (tmp2 != nullptr)
+    rest = tmp2;
+
+  while (rest != nullptr) {
+    tmp3 = Append(res, rest, tmp3);
+    rest = rest->next;
+  }
+
+  return OK;
+}
+
+ERR_STATUS SetIntersection(std::string setName1, std::string setName2, std::string resName, univ_t* univ) {
+  if (univ == nullptr)
+    return ERROR;
+
+  set_t* set1 = SetSearch(setName1, univ);
+  if (set1 == nullptr)
+    return NOT_FOUND_SET;
+
+  set_t* set2 = SetSearch(setName2, univ);
+  if (set2 == nullptr)
+    return NOT_FOUND_SET;
+
+  SetCreate(resName, univ);
+  set_t* res = SetSearch(resName, univ);
+  if (res == nullptr)
+    return ERROR;
+
+  elem_t* tmp1 = set1->head;
+  elem_t* tmp2 = set2->head;
+  elem_t* tmp3 = res->head;
+
+  while (tmp1 != nullptr && tmp2 != nullptr) {
+    if (tmp1->elemName > tmp2->elemName) {
+      tmp1 = tmp1->next;
+    }
+    else if (tmp1->elemName < tmp2->elemName) {
+      tmp2 = tmp2->next;
+    }
+    else {
+      tmp3 = Append(res, tmp1, tmp3);
+      tmp1 = tmp1->next;
+      tmp2 = tmp2->next;
+    }
+  }
+  return OK;
+}
+
+
+ERR_STATUS SetDiff(std::string setName1, std::string setName2, std::string resName, univ_t* univ) {
+  if (univ == nullptr)
+    return ERROR;
+
+  set_t* set1 = SetSearch(setName1, univ);
+  if (set1 == nullptr)
+    return NOT_FOUND_SET;
+
+  set_t* set2 = SetSearch(setName2, univ);
+  if (set2 == nullptr)
+    return NOT_FOUND_SET;
+
+  SetCreate(resName, univ);
+  set_t* res = SetSearch(resName, univ);
+  if (res == nullptr)
+    return ERROR;
+
+  elem_t* tmp1 = set1->head;
+  elem_t* tmp2 = set2->head;
+  elem_t* tmp3 = res->head;
+
+  while (tmp1 != nullptr && tmp2 != nullptr) {
+    if (tmp1->elemName > tmp2->elemName) {
+      tmp3 = Append(res, tmp1, tmp3);
+      tmp1 = tmp1->next;
+    }
+    else if (tmp1->elemName < tmp2->elemName) 
+      tmp2 = tmp2->next;
+    else {
+      tmp1 = tmp1->next;
+      tmp2 = tmp2->next;
+    }
+  }
+
+  while (tmp1 != nullptr) {
+    tmp3 = Append(res, tmp1, tmp3);
+    tmp1 = tmp1->next;
+  }
+
+  return OK;
+}
+
+ERR_STATUS SetSymDiff(std::string setName1, std::string setName2, std::string resName, univ_t* univ) {
+  if (univ == nullptr)
+    return ERROR;
+
+  set_t* set1 = SetSearch(setName1, univ);
+  if (set1 == nullptr)
+    return NOT_FOUND_SET;
+
+  set_t* set2 = SetSearch(setName2, univ);
+  if (set2 == nullptr)
+    return NOT_FOUND_SET;
+
+  SetCreate(resName, univ);
+  set_t* res = SetSearch(resName, univ);
+  if (res == nullptr)
+    return ERROR;
+
+  elem_t* tmp1 = set1->head;
+  elem_t* tmp2 = set2->head;
+  elem_t* tmp3 = res->head;
+  elem_t* rest = nullptr;
+
+  while (tmp1 != nullptr && tmp2 != nullptr) {
+    if (tmp1->elemName > tmp2->elemName) {
+      tmp3 = Append(res, tmp1, tmp3);
+      tmp1 = tmp1->next;
+    }
+    else if (tmp1->elemName < tmp2->elemName) {
+      tmp3 = Append(res, tmp2, tmp3);
+      tmp2 = tmp2->next;
+    }
+    else {
+      tmp1 = tmp1->next;
+      tmp2 = tmp2->next;
+    }
+  }
+
+  if (tmp1 != nullptr)
+    rest = tmp1;
+  if (tmp2 != nullptr)
+    rest = tmp2;
+
+  while (rest != nullptr) {
+    tmp3 = Append(res, rest, tmp3);
+    rest = rest->next;
+  }
+
+  return OK;
+}
+
+ERR_STATUS SetInclusion(std::string setName1, std::string setName2, univ_t* univ) {
+  if (univ == nullptr)
+    return ERROR;
+
+  set_t* set1 = SetSearch(setName1, univ);
+  if (set1 == nullptr)
+    return NOT_FOUND_SET;
+
+  set_t* set2 = SetSearch(setName2, univ);
+  if (set2 == nullptr)
+    return NOT_FOUND_SET;
+
+  elem_t* tmp1 = set1->head;
+  elem_t* tmp2 = set2->head;
+
+  while (tmp1 != nullptr && tmp2 != nullptr) {
+    if (tmp1->elemName > tmp2->elemName)
+      return NOT_INCLUDE;
+    else if (tmp1->elemName < tmp2->elemName)
+      tmp2 = tmp2->next;
+    else {
+      tmp1 = tmp1->next;
+      tmp2 = tmp2->next;
+    }
+  }
+  if (tmp1 != nullptr)
+    return NOT_INCLUDE;
+
+  return INCLUDE;
+}
+
