@@ -122,12 +122,13 @@ ERR_STATUS PrintSetList(univ_t* univ) {
     std::cout << "Empty..." << std::endl;
     return OK;
   }
+  set_t* tmp = univ->head;
 
-  for (set_t* tmp = univ->head; tmp != nullptr; tmp = tmp->next) {
+  for (; tmp ->next != nullptr; tmp = tmp->next) {
     std::cout << tmp->setName << ", ";
   }
-  std::cout << std::endl;
 
+  std::cout << tmp->setName << std::endl;;
   return OK;
 }
 

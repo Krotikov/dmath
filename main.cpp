@@ -1,24 +1,17 @@
-#include <iostream>
-#include <string>
-#include "input.h"
-#include "process.h"
+﻿#include "process.h"
 
 using std::string;
 using std::cin;
-using std::cout;
+using std::wcout;
 using std::endl;
 
-/*
-create "set_name" //correct
-create "sob@4|(a" //correct
-create "$_$+-_-"  //correct
-create "set"name" //error
-create "set_name  //error
-create set_name"  //error
-*/
 
-int main() {
-  
+int wmain(int argc, wchar_t* argv[])
+{
+  //_setmode(_fileno(stdout), _O_U16TEXT);
+  _setmode(_fileno(stdin), _O_U16TEXT);
+ // _setmode(_fileno(stderr), _O_U16TEXT);
+
   Process();
 
   return 0;

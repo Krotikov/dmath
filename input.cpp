@@ -1,6 +1,6 @@
 #include "input.h"
 
-ERR_STATUS InpCheckArg(char symb) {
+ERR_STATUS InpCheckArg(wchar_t symb) {
   if (symb > 255)
     return ERROR;
 
@@ -11,7 +11,7 @@ ERR_STATUS InpCheckArg(char symb) {
 }
 
 
-ERR_STATUS InpGetArg(std::string* arg, std::string input, decltype(input.size())* index) {
+ERR_STATUS InpGetArg(std::string* arg, std::wstring input, decltype(input.size())* index) {
   for (; *index < input.size() && isspace(input[*index]); ++(*index));
 
   if (input[*index] != '\"')
@@ -38,7 +38,7 @@ ERR_STATUS InpGetArg(std::string* arg, std::string input, decltype(input.size())
   return OK;
 }
 
-ERR_STATUS InpGetTwoArgs(std::string* arg1, std::string* arg2, std::string input, decltype(input.size())* index) {
+ERR_STATUS InpGetTwoArgs(std::string* arg1, std::string* arg2, std::wstring input, decltype(input.size())* index) {
   ERR_STATUS status = OK;
 
   status = InpGetArg(arg1, input, index);
@@ -52,7 +52,7 @@ ERR_STATUS InpGetTwoArgs(std::string* arg1, std::string* arg2, std::string input
   return OK;
 }
 
-ERR_STATUS InpGetThreeArgs(std::string* arg1, std::string* arg2, std::string* arg3, std::string input, decltype(input.size())* index) {
+ERR_STATUS InpGetThreeArgs(std::string* arg1, std::string* arg2, std::string* arg3, std::wstring input, decltype(input.size())* index) {
   ERR_STATUS status = OK;
 
   status = InpGetArg(arg1, input, index);
@@ -70,7 +70,22 @@ ERR_STATUS InpGetThreeArgs(std::string* arg1, std::string* arg2, std::string* ar
   return OK;
 }
 
+ERR_STATUS Help() {
+  std::ifstream in("help.txt");
+  const int size = 256;
+  char line[size] = { "" };
 
+  if (!in)
+    return ERROR;
+
+  while (!in.eof()) {
+    in.getline(line, size);
+    std::wcout << line << std::endl;
+  }
+  in.close();
+
+  return OK;
+}
 
 
 

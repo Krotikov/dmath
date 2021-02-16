@@ -4,9 +4,7 @@
 #ifndef SET_H
 #define SET_H
 
-#include "error.h"
-#include <iostream>
-#include <string>
+#include "input.h"
 
 typedef struct elem_t {
   std::string elemName;

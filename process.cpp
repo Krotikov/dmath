@@ -1,7 +1,8 @@
 #include "process.h"
 
+//using std::wstring;
 using std::string;
-using std::cin;
+using std::wcin;
 using std::cout;
 using std::endl;
 
@@ -20,6 +21,7 @@ typedef enum {
   INCLUSION,
   CHECK_SET_LIST,
   CHECK_SET,
+  HELP
 }COMANDS_T;
 
 COMANDS_T Operator(string comand) {
@@ -49,6 +51,8 @@ COMANDS_T Operator(string comand) {
     return CHECK_SET_LIST;
   if (comand == "checkSet")
     return CHECK_SET;
+  if (comand == "help")
+    return HELP;
 
   return WRONG_COMAND;
 }
@@ -56,10 +60,10 @@ COMANDS_T Operator(string comand) {
 void PrintErr(ERR_STATUS status) {
   switch (status) {
   case NO_OPEN_QUOTE:
-    cout << "ERROR: No open quote" << endl;
+    cout << L"ERROR: No open quote" << endl;
     break;
   case NO_CLOSE_QUOTE:
-    cout << "ERROR: No close quote" << endl;
+    cout << L"ERROR: No close quote" << endl;
     break;
   case INCORRECT_ARG:
     cout << "ERROR: Probem with input arguments (perhaps using bad symbols)" << endl;
@@ -96,7 +100,7 @@ void PrintErr(ERR_STATUS status) {
 
 void Process() {
   //Main
-  string input;
+  std::wstring input;
   string comand;
   univ_t* univ;
   decltype(input.size()) index;
@@ -113,7 +117,7 @@ void Process() {
 
   univ = InitUniv();
 
-  while (getline(cin, input)) {
+  while (getline(wcin, input)) {
     for (index = 0; index != input.size() && !isspace(input[index]); ++index)
       comand += input[index];
 
@@ -258,6 +262,14 @@ void Process() {
 
     case CHECK_SET_LIST:
       status = PrintSetList(univ);
+      if (status != OK) {
+        PrintErr(status);
+        break;
+      }
+      break;
+
+    case HELP:
+      status = Help();
       if (status != OK) {
         PrintErr(status);
         break;

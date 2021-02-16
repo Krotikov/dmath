@@ -4,7 +4,7 @@ List of comands for program:
 2)delete "set-name" - delete set (if exist)
 
 3)addElem "elem-name" "set-name" - add element to set (if exist)
-4)delElem "elem-name" "set-name" - delete elem to set (if exist)
+4)deleteElem "elem-name" "set-name" - delete elem from set (if exist)
 5)searchElem "elem-name" "set-name" - search elem in set (if exist)
 
 6)cardinality "set-name" - returns cardinaity of set

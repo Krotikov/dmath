@@ -26,3 +26,5 @@ addElem "abc""a"
 
 create "a"
 addElem "abc" to "a"
+
+create "привет"
