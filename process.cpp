@@ -60,10 +60,10 @@ COMANDS_T Operator(string comand) {
 void PrintErr(ERR_STATUS status) {
   switch (status) {
   case NO_OPEN_QUOTE:
-    cout << L"ERROR: No open quote" << endl;
+    cout << "ERROR: No open quote" << endl;
     break;
   case NO_CLOSE_QUOTE:
-    cout << L"ERROR: No close quote" << endl;
+    cout << "ERROR: No close quote" << endl;
     break;
   case INCORRECT_ARG:
     cout << "ERROR: Probem with input arguments (perhaps using bad symbols)" << endl;

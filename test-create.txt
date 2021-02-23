@@ -25,3 +25,7 @@ create "b"
 create "a"
 checkSetList
 
+create "привет"
+
+create "пока"
+

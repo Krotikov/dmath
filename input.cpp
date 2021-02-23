@@ -1,10 +1,13 @@
 #include "input.h"
 
 ERR_STATUS InpCheckArg(wchar_t symb) {
-  if (symb > 255)
+  if (symb == 8217) //8217 - code of '’'
+    return OK;
+
+  if (symb > 255) 
     return ERROR;
 
-  if (isprint(symb) == false || symb == '_')
+  if (isprint(symb) == false || symb == '_') //because of task
     return WRONG_SYMBOL;
 
   return OK;
@@ -21,6 +24,11 @@ ERR_STATUS InpGetArg(std::string* arg, std::wstring input, decltype(input.size()
   for (; *index < input.size() && input[*index] != '\"'; ++(*index)) {
     if(InpCheckArg(input[*index]) != OK)
       return INCORRECT_ARG;
+
+    if (input[*index] == 8217) { //please...
+      *arg += "'";
+      continue;
+    }
 
     *arg += input[*index];
   }
@@ -86,6 +94,3 @@ ERR_STATUS Help() {
 
   return OK;
 }
-
-
-

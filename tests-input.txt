@@ -20,7 +20,7 @@ addElem "abc" "a"
 create  "a"
 addElem "abc"    "a"
 
-//Error
+//Error ------------------------
 create "a"
 addElem "abc""a"
 

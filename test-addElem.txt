@@ -19,3 +19,14 @@ addElem "abc" "a"
 addElem "abcd" "a"
 addElem "abc" "a"
 checkSet "a"
+
+//Some bug wich was fixed
+create "a"
+addElem "a" "a"
+addElem "a"
+
+create "b"
+addElem "’" "b"
+checkSet "b"
+addElem "~" "b"
+addElem ".,:;!?+-*/=%\|()[]{}<>@#$^&" "b"

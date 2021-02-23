@@ -128,7 +128,7 @@ ERR_STATUS PrintSetList(univ_t* univ) {
     std::cout << tmp->setName << ", ";
   }
 
-  std::cout << tmp->setName << std::endl;;
+  std::cout << tmp->setName << std::endl;
   return OK;
 }
 
@@ -160,9 +160,11 @@ ERR_STATUS SetPrint(std::string setName, univ_t* univ) {
     return OK;
   }
 
-  for(elem_t* tmp = set->head; tmp != nullptr; tmp = tmp->next)
+  elem_t* tmp = set->head;
+  for(; tmp->next != nullptr; tmp = tmp->next)
     std::cout << tmp->elemName << ", ";
-  std::cout << std::endl;
+
+  std::cout << tmp->elemName << std::endl;
 
   return OK;
 }
