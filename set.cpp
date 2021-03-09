@@ -99,7 +99,7 @@ ERR_STATUS SetCreate(std::string setName, univ_t* univ) {
 
   if (tmp->setName == set->setName) {
     delete set;
-    return ERROR_SAME_NAME;
+    return ERROR_SAME_NAME_SET;
   }
 
   set->next = tmp;
@@ -162,9 +162,9 @@ ERR_STATUS SetPrint(std::string setName, univ_t* univ) {
 
   elem_t* tmp = set->head;
   for(; tmp->next != nullptr; tmp = tmp->next)
-    std::cout << tmp->elemName << ", ";
+    std::cout << "\"" << tmp->elemName << "\"" << ", ";
 
-  std::cout << tmp->elemName << std::endl;
+  std::cout << "\"" << tmp->elemName << "\"" << "." << std::endl;
 
   return OK;
 }
@@ -251,7 +251,7 @@ ERR_STATUS ElemAdd(std::string elemName, std::string setName, univ_t* univ) {
 
   if(tmp->elemName == elem->elemName) {
     delete elem;
-    return ERROR_SAME_NAME;
+    return ERROR_SAME_NAME_ELEM;
   }
 
   elem->next = tmp;
@@ -355,7 +355,9 @@ ERR_STATUS SetUnion(std::string setName1, std::string setName2, std::string resN
   if (set2 == nullptr)
     return NOT_FOUND_SET;
 
-  SetCreate(resName, univ);
+  if (SetCreate(resName, univ) != OK)
+    return ERROR_SAME_NAME_SET;
+
   set_t* res = SetSearch(resName, univ);
   if (res == nullptr)
     return ERROR;
@@ -446,7 +448,9 @@ ERR_STATUS SetDiff(std::string setName1, std::string setName2, std::string resNa
   if (set2 == nullptr)
     return NOT_FOUND_SET;
 
-  SetCreate(resName, univ);
+  if (SetCreate(resName, univ) != OK)
+    return ERROR_SAME_NAME_SET;
+
   set_t* res = SetSearch(resName, univ);
   if (res == nullptr)
     return ERROR;
@@ -488,7 +492,9 @@ ERR_STATUS SetSymDiff(std::string setName1, std::string setName2, std::string re
   if (set2 == nullptr)
     return NOT_FOUND_SET;
 
-  SetCreate(resName, univ);
+  if (SetCreate(resName, univ) != OK)
+    return ERROR_SAME_NAME_SET;
+
   set_t* res = SetSearch(resName, univ);
   if (res == nullptr)
     return ERROR;

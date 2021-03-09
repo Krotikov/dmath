@@ -71,8 +71,11 @@ void PrintErr(ERR_STATUS status) {
   case TOO_LONG:
     cout << "ERROR: Argument is too long" << endl;
     break;
-  case ERROR_SAME_NAME:
+  case ERROR_SAME_NAME_SET:
     cout << "ERROR: the set with this name already exist" << endl;
+    break;
+  case ERROR_SAME_NAME_ELEM:
+    cout << "ERROR: the element with this name already exist" << endl;
     break;
   case NOT_FOUND_SET:
     cout << "ERROR: the set with this name does not exist" << endl;
