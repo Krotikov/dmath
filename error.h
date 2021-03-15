@@ -20,7 +20,8 @@ typedef enum {
   NOT_FOUND_SET, 
   NOT_FOUND_EL, 
   NOT_INCLUDE, 
-  INCLUDE
+  INCLUDE, 
+  WRONG_COMAND_ERR
 }ERR_STATUS;
 
 #endif /*ERROR_H*/

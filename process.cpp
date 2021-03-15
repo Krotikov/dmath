@@ -92,6 +92,9 @@ void PrintErr(ERR_STATUS status) {
   case ERROR:
     cout << "ERROR: does not classified this error" << endl;
     break;
+  case WRONG_COMAND_ERR:
+    cout << "ERROR: wrong comand name" << endl;
+    break;
   default:
     cout << "ERROR: Forgot to add new case" << endl;
     break;
@@ -121,8 +124,16 @@ void Process() {
   univ = InitUniv();
 
   while (getline(wcin, input)) {
-    for (index = 0; index != input.size() && !isspace(input[index]); ++index)
+    for (index = 0; index != input.size(); ++index) {
+      if (input[index] > 255) {
+        //PrintErr(WRONG_COMAND_ERR);
+        break;
+      }
+      if (isspace(input[index]))
+        break;
+
       comand += input[index];
+    }
 
     switch (Operator(comand))
     {
@@ -280,7 +291,7 @@ void Process() {
       break;
 
     default:
-      cout << "ERROR: wrong comand name" << endl;
+      PrintErr(WRONG_COMAND_ERR);
       break;
     }
 
