@@ -117,7 +117,7 @@ ERR_STATUS S(const unsigned m, const unsigned n, unsigned& res) {
   return OK;
 }
 
-ERR_STATUS B(const unsigned n, unsigned& res) {
+ERR_STATUS B(const unsigned n, unsigned& res) { //
   if (n == 0) {
     res = 1;
     return OK;

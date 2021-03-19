@@ -1,5 +1,22 @@
 #include "input.h"
 
+ERR_STATUS Help() {
+  std::ifstream in("help.txt");
+  const int size = 256;
+  char line[size] = { "" };
+
+  if (!in)
+    return ERROR;
+
+  while (!in.eof()) {
+    in.getline(line, size);
+    std::wcout << line << std::endl;
+  }
+  in.close();
+
+  return OK;
+}
+
 ERR_STATUS CheckArg(const unsigned num, const wchar_t symb) { //symb - digit, num < MAX
   assert(num >= 0);
   assert(isdigit(symb));

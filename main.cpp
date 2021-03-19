@@ -47,11 +47,12 @@ void PrintErr(ERR_STATUS status) {
 
 int main() {
   std::wstring input;
-  char oper;
+  char oper = '1';
   size_t index;
  
 
   do {
+    input = L"";
     getline(std::wcin, input);
     unsigned arg1 = 0;
     unsigned arg2 = 0;
@@ -65,6 +66,12 @@ int main() {
     }
     oper = (char)input[index];
     ++index;
+
+    //kostyl
+    if (oper == '\0') {
+      cout << "You entered ctrl+z, have a nice day " << endl;
+      return OK;
+    }
 
     if (oper == 'U' || oper == 'A' || oper == 'C' || oper == 'S') {
       status = ReadTwoArgs(arg1, arg2, index, input);
@@ -133,16 +140,12 @@ int main() {
         break;
       }
     }
-    else if (oper == 'Q') {
+    else if (oper == 'Q')
       return OK;
-    }
-    else if (oper == 'H') {
-      //TODO: print some file with syntax
-    }
-    else {
+    else if (oper == 'H') 
+      Help();
+    else
       PrintErr(WRONG_COMAND_NAME);
-      //return ERROR;
-    }
 
   } while (oper != 'Q'); //will be useless
 

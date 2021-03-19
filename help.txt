@@ -1,0 +1,21 @@
+List of comands:
+--To calculate--
+1)U(m, n) - calculate number of permutations without repetition
+2)A(m, n) - calculate number of permutations with repetition
+3)P(n) - calculate number of permutations without repetition  (where n == m)
+4)C(m, n) - calculate number of combinations without repetition
+5)S(m, n) - calculate Stirling numbers of the second kind
+6)B(n) - calculate Bell number
+
+--Interface--
+1)H - help comand
+2)Q - to stop program
+
+Points:
+1)1st symbol in you input must be comand name
+2)The interface is space friendly. So you can enter 
+as many spaces as you like, but be sure to follow the syntax.
+For instance, "C ( m , n )", "C(m,n)" or "C  (  m  ,  n  )" - is correct.
+3)Functions calculates not for all m and n (due to the fact that program use
+32-bit numbers, which are limited by 4294967295)
+[4)Please do not enter ctrl+z in your input.]

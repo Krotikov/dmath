@@ -10,6 +10,8 @@
 
 //ERR_STATUS CheckArg(const unsigned num, const char symb);
 
+ERR_STATUS Help();
+
 ERR_STATUS ReadTwoArgs(unsigned& arg1, unsigned& arg2, size_t& index, const std::wstring& input);
 
 ERR_STATUS ReadArg(unsigned& arg, size_t& index, const std::wstring& input);
