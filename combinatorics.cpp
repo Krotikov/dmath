@@ -1,6 +1,6 @@
 #include "combinatorics.h"
 
-ERR_STATUS U(const unsigned m, const unsigned n, unsigned& res) {
+ERR_STATUS A(const unsigned m, const unsigned n, unsigned& res) {
   if (n > m) {
     res = 0;
     return OK;
@@ -11,23 +11,25 @@ ERR_STATUS U(const unsigned m, const unsigned n, unsigned& res) {
   for (unsigned i = 0; i < n; ++i) {
     unsigned mult = max / res;
     unsigned tmp = m - i;
-    if(mult >= tmp)
-      res *= (m - i);
+    if(mult < tmp)
+      return NOT_CALC;
 
-    return NOT_CALC;
+    res *= (m - i);
   }
   return OK;
 }
 
-ERR_STATUS A(const unsigned m, const unsigned n, unsigned& res) {
+ERR_STATUS U(const unsigned m, const unsigned n, unsigned& res) {
+
   res = 1;
   unsigned max = MAX;
   for (unsigned i = 0; i < n; ++i) {
     unsigned mult = max / res;
-    if (mult >= m)
-      res *= m;
+    if (mult < m)
+      return NOT_CALC;
 
-    return NOT_CALC;
+
+    res *= m;
   }
   return OK;
 }
@@ -79,6 +81,17 @@ ERR_STATUS C(const unsigned m, const unsigned n, unsigned& res) {
   return OK;
 }
 
+static ERR_STATUS prod(unsigned a, unsigned b, unsigned& prod) {
+  unsigned max = MAX;
+  prod = a;
+  for (unsigned i = 1; i < b; ++i) {
+    if (prod > max - a)
+      return NOT_CALC;
+    prod += a;
+  }
+  return OK;
+}
+
 ERR_STATUS S(const unsigned m, const unsigned n, unsigned& res) {
   if (m == n) {
     res = 1;
@@ -106,9 +119,13 @@ ERR_STATUS S(const unsigned m, const unsigned n, unsigned& res) {
 
   for (unsigned i = 2; i < (m - tmp + 3); ++i) {
     for (unsigned j = 2; j < tmp; ++j) {
-      if (arr[j - 1] > max - arr[j])
+      unsigned pr = 0;
+      if (prod(arr[j], j, pr) != OK)
         return NOT_CALC;
-      arr[j] = j*arr[j] + arr[j - 1];
+      if (pr > max - arr[j-1])
+        return NOT_CALC;
+
+      arr[j] = pr + arr[j - 1];
     }
   }
 

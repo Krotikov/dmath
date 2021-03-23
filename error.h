@@ -23,7 +23,8 @@ typedef enum {
   NO_COMA,
   TOOBIG_ARG,
   WRONG_COMAND_NAME, 
-  NOT_CALC
+  NOT_CALC, 
+  EMPTY_STR
 
 }ERR_STATUS;
 

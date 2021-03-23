@@ -1,7 +1,7 @@
 List of comands:
 --To calculate--
-1)U(m, n) - calculate number of permutations without repetition
-2)A(m, n) - calculate number of permutations with repetition
+1)U(m, n) - calculate number of permutations with repetition
+2)A(m, n) - calculate number of permutations without repetition
 3)P(n) - calculate number of permutations without repetition  (where n == m)
 4)C(m, n) - calculate number of combinations without repetition
 5)S(m, n) - calculate Stirling numbers of the second kind

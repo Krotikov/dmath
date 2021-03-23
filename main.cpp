@@ -33,6 +33,9 @@ void PrintErr(ERR_STATUS status) {
   case NOT_CALC:
     cout << "ERROR: the value can't be calculate in 32-bit numbers" << endl;
     break;
+  case EMPTY_STR:
+    cout << "ERROR: there is no input" << endl;
+    break;
   case ERROR:
     cout << "ERROR: does not classified this error" << endl;
     break;
@@ -53,7 +56,16 @@ int main() {
 
   do {
     input = L"";
-    getline(std::wcin, input);
+    if (!getline(std::wcin, input)) {
+      cout << "You entered ctrl+z, have a nice day" << endl;
+      return OK;
+    }
+
+    if (input.empty() == true) {
+      PrintErr(EMPTY_STR);
+      continue;
+    }
+
     unsigned arg1 = 0;
     unsigned arg2 = 0;
     unsigned res = 0;
@@ -66,12 +78,6 @@ int main() {
     }
     oper = (char)input[index];
     ++index;
-
-    //kostyl
-    if (oper == '\0') {
-      cout << "You entered ctrl+z, have a nice day " << endl;
-      return OK;
-    }
 
     if (oper == 'U' || oper == 'A' || oper == 'C' || oper == 'S') {
       status = ReadTwoArgs(arg1, arg2, index, input);
