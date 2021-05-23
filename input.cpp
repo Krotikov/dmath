@@ -4,8 +4,8 @@ ERR_STATUS CheckArg(const size_t num, const wchar_t symb, const size_t n) { //sy
   assert(num >= 0);
   assert(isdigit(symb));
 
-  size_t bord = n * n / 10 * 10;
-  char adm = n * n % 10;
+  size_t bord = n / 10;
+  char adm = n % 10;
 
   if (num < bord)
     return OK;
@@ -58,7 +58,7 @@ ERR_STATUS ReadArg(size_t& ver1, size_t& ver2, size_t& cost, const std::wstring&
       ++index;
     }
     if (input[index] == 'f' && flagNum == 0) {
-      ver1 = size * size;
+      ver1 = size;
       ++index;
     }
     if (input[index] != '-')
@@ -86,7 +86,7 @@ ERR_STATUS ReadArg(size_t& ver1, size_t& ver2, size_t& cost, const std::wstring&
       ++index;
     }
     if (input[index] == 'f' && flagNum == 0) {
-      ver2 = size * size;
+      ver2 = size;
       ++index;
     }
     if (input[index] != ' ')

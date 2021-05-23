@@ -1,6 +1,8 @@
 #include "error.h"
 #include "graf.h"
 
+#define INF -1
+
 using namespace std;
 
 void PrintErr(ERR_STATUS status) {
@@ -17,6 +19,24 @@ void PrintErr(ERR_STATUS status) {
   case INC_GRAF:
     cout << "ERROR: the graf you entered has too many edges" << endl;
     break;
+  case INCORRECT_INPUT:
+    cout << "ERROR: the input file contains invalid characters" << endl;
+    break;
+  case NO_DASH:
+    cout << "ERROR: there is some problem with dash in edge descrition in input file" << endl;
+    break;
+  case NO_SPACE:
+    cout << "ERROR: there is some problem with dash in edge descrition in input file" << endl;
+    break;
+  case TOOBIG_ARG:
+    cout << "ERROR: the value of vertex is too big" << endl;
+    break;
+  case TOOBIG_COST:
+    cout << "ERROR: the value of cost is too big" << endl;
+    break;
+  case EMPTY_FILE:
+    cout << "ERROR: the file is empty" << endl;
+    break;
   case ERROR:
     cout << "ERROR: does not classified this error" << endl;
     break;
@@ -30,8 +50,10 @@ void PrintErr(ERR_STATUS status) {
 
 int main() {
 
-  wfstream superfile("graf.txt");
+  wfstream superfile("graf.txt"); //also available graf1.txt and graf2.txt
   vector<wstring> lineVec;
+  ERR_STATUS status = OK;
+
   if (superfile.is_open()) {
 
     wstring str;
@@ -65,20 +87,25 @@ int main() {
       return 0;
     }
 
-    size_t ver1 = 0, ver2 = 0, cost = 0;
-
-    for (auto& str : lineVec) {
-      if (ReadArg(ver1, ver2, cost, str, 4) == OK) {
-        cout << ver1 << " " << ver2 << " " << cost << endl;
-        continue;
-      }
-
-      return 1;
+    Graf graf(lineVec, n);
+    if (graf.status != OK) {
+      PrintErr(status);
+      return 0;
     }
 
+    graf.minpath();
+    cout << graf.T[n * n - 1] << endl;
+
+    if (graf.T[n * n - 1] == INF) {
+      PrintErr(NO_WAY);
+      return 0;
+    }
+
+    string path = graf.getMinPath();
+    cout << "Path: " << path << endl;
   }
   else {
-    cout << "Unable to open file" << endl;
+    cout << "ERROR: unable to open file" << endl;
   }
 
   return 0;
